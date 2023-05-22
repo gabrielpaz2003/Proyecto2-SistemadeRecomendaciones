@@ -109,7 +109,12 @@ public class EmbeddedNeo4j implements AutoCloseable {
         }
         return null;
     }
+
+    public String insertMovie(String movieTitle, int parseInt, String tagline) {
+        return movieTitle;
+    }
 }
+
 
 
 
