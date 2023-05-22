@@ -48,7 +48,7 @@ public class SaveProductServlet extends HttpServlet {
 	 	
 	 	 try ( EmbeddedNeo4j neo4jDriver = new EmbeddedNeo4j( "neo4j+s://40c6bfa9.databases.neo4j.io", "neo4j", "tojG1xseDQwqu_DVyu9g1VAzGfM5COUKbLn9hs2vBIs " ) )
 	        {
-			 	String myResultTx = neo4jDriver.insertMovie(nombreProducto, Integer.parseInt(precioProducto), descripcionProducto);
+			 	String myResultTx = neo4jDriver.insertProduct(nombreProducto, Integer.parseInt(precioProducto), descripcionProducto);
 	        	
 			 	myResponse.put("resultado", myResultTx);
 	        } catch (Exception e) {
