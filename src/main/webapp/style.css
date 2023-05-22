@@ -29,6 +29,15 @@ body {
 
 }
 
+footer {
+    text-align: center;
+    background-color: none;
+    color: white;
+    font-size: 14px;
+    margin-top: 50px;
+  }
+  
+
 header {
     background-color: #fff;
     padding: 20px;
