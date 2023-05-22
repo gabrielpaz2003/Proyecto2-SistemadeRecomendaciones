@@ -2,7 +2,7 @@
  *
  */
 package dataAccessLayer;
-
+import java.util.concurrent.CompletableFuture;
 import org.neo4j.driver.AuthTokens;
 import org.neo4j.driver.Driver;
 import org.neo4j.driver.GraphDatabase;
@@ -111,30 +111,23 @@ public class EmbeddedNeo4j implements AutoCloseable{
         }
     }
 
-    public String insertMovie(String title, int releaseYear, String tagline) {
-        try ( Session session = driver.session() )
-        {
 
-            String result = session.writeTransaction( new TransactionWork<String>()
 
-                                                      {
-                                                          @Override
-                                                          public String execute( Transaction tx )
-                                                          {
-                                                              tx.run( "CREATE (Test:Movie {title:'" + title + "', released:"+ releaseYear +", tagline:'"+ tagline +"'})");
-
-                                                              return "OK";
-                                                          }
-                                                      }
-
-            );
-
-            return result;
-        } catch (Exception e) {
-            return e.getMessage();
+    public String insertProduct(String nombreProducto, int precioProducto, String descripcionProducto) {
+        try (Session session = driver.session()) {
+            CompletableFuture<String> result = CompletableFuture.supplyAsync(() -> {
+                try (Transaction tx = session.beginTransaction()) {
+                    tx.run("CREATE (Test:Producto {nombre:'" + nombreProducto + "', precio:" + precioProducto + ", descripcion:'" + descripcionProducto + "'})");
+                    tx.commit();
+                    return "OK";
+                }
+            });
+            return result.get();
+        } catch (InterruptedException | ExecutionException e) {
+            e.printStackTrace();
         }
+        return null;
     }
-
 }
 
 
