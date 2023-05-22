@@ -7,7 +7,7 @@
 		$.ajax( {
 			
 			type: "GET",
-			url: '/Grupo20/SaveMovieServlet?nombreProducto=' + $('#txt-nombre-producto').val() + '&precioProducto=' + $('#txt-precio-producto').val() + '&descripcionProducto=' + $('#txt-descripcion-producto').val() ,
+			url: '/Seccion10Grupo18/SaveMovieServlet?nombreProducto=' + $('#txt-nombre-producto').val() + '&precioProducto=' + $('#txt-precio-producto').val() + '&descripcionProducto=' + $('#txt-descripcion-producto').val() ,
 			success: function(data) {
 			    alert("Resultado: " + data.resultado);
 			}
