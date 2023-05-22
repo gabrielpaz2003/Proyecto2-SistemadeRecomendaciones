@@ -1,20 +1,15 @@
-
-
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.LinkedList;
+import dataAccessLayer.EmbeddedNeo4j;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import org.json.simple.JSONObject;
-
-import dataAccessLayer.EmbeddedNeo4j;
-
-import org.json.simple.JSONArray;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.LinkedList;
 
 /**
  * Servlet implementation class MoviesByActor
@@ -44,7 +39,7 @@ public class MoviesByActor extends HttpServlet {
 	 	JSONArray PeliculasActor = new JSONArray();
 	 	
 	 	String myActor = request.getParameter("actor_name");
-	 	 try ( EmbeddedNeo4j greeter = new EmbeddedNeo4j( "bolt://44.215.127.186:7687", "neo4j", "elapse-career-realignments" ) )
+	 	 try ( EmbeddedNeo4j greeter = new EmbeddedNeo4j( "neo4j+s://40c6bfa9.databases.neo4j.io", "neo4j", "tojG1xseDQwqu_DVyu9g1VAzGfM5COUKbLn9hs2vBIs" ) )
 	        {
 			 	LinkedList<String> myactors = greeter.getMoviesByActor(myActor);
 			 	

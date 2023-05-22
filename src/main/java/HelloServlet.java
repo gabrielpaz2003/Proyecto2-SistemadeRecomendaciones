@@ -1,19 +1,16 @@
-
-
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.LinkedList;
+import dataAccessLayer.EmbeddedNeo4j;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import org.json.simple.JSONObject;
-import org.json.simple.JSONArray;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.LinkedList;
 
-
-import dataAccessLayer.EmbeddedNeo4j;
 
 /**
  * Servlet implementation class HelloServlet
@@ -43,7 +40,7 @@ public class HelloServlet extends HttpServlet {
 		 	JSONArray nombresActores = new JSONArray();
 		 	
 		 	 //try ( EmbeddedNeo4j greeter = new EmbeddedNeo4j( "bolt://localhost:7687", "neo4j", "Test1234" ) )
-		 	try ( EmbeddedNeo4j greeter = new EmbeddedNeo4j( "bolt://44.215.127.186:7687", "neo4j", "elapse-career-realignments" ) )
+		 	try ( EmbeddedNeo4j greeter = new EmbeddedNeo4j( "neo4j+s://821f0bc2.databases.neo4j.io", "neo4j", "tojG1xseDQwqu_DVyu9g1VAzGfM5COUKbLn9hs2vBIs" ) )
 		        {
 				 	LinkedList<String> myactors = greeter.getActors();
 				 	
