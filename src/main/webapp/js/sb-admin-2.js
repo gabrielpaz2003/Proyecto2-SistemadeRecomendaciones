@@ -109,7 +109,7 @@
 			type: "GET",
 			url: '/Seccion10Grupo18/SaveMovieServlet?title=' + $('#txt-movie-title').val() + '&release_year=' + $('#txt-movie-release_year').val() + '&tagline=' + $('#txt-movie-tagline').val() ,
 			success: function(data) {
-			    alert("Resultado: " + data.resultado);
+			    alert("Resultado: " + data);
 			}
 		} );
 		
