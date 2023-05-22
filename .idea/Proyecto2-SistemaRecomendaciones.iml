@@ -40,6 +40,8 @@
     <orderEntry type="library" name="json-simple-1.1-sources" level="project" />
     <orderEntry type="library" name="github.cliftonlabs.json.simple" level="project" />
     <orderEntry type="library" name="xkcoding.json.simple" level="project" />
+    <orderEntry type="library" name="googlecode.json.simple" level="project" />
+    <orderEntry type="library" name="neo4j.driver.java" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: jakarta.servlet:jakarta.servlet-api:5.0.0" level="project" />
     <orderEntry type="library" name="Maven: org.glassfish.jersey.containers:jersey-container-servlet:3.0.4" level="project" />
     <orderEntry type="library" name="Maven: org.glassfish.jersey.containers:jersey-container-servlet-core:3.0.4" level="project" />

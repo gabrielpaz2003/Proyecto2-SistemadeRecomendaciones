@@ -60,7 +60,7 @@
 		$.ajax( {
 			
 			type: "GET",
-			url: '/Grupo20/HelloServlet',
+			url: '/Grupo18-S10/HelloServlet',
 			success: function(data) {
 				//alert("Result" + data.resultado);
 			    var htmlActorsList = '<ul>';
@@ -82,7 +82,7 @@
 		$.ajax( {
 			
 			type: "GET",
-			url: '/Grupo20/MoviesByActor?actor_name=' + $('#txt-actor').val(),
+			url: '/Grupo18-S10/MoviesByActor?actor_name=' + $('#txt-actor').val(),
 			success: function(data) {
 				//alert("Result" + data.resultado);
 			    var htmlMovieList = '<ul>';
@@ -102,12 +102,12 @@
 	//Evento del botón que creara una nueva pelicula
 	$("#btn-movie-insert").click(function(){
 		
-		//alert("Resultado: " + '/Grupo20/SaveMovieServlet?title=' + $('#txt-movie-title').val() + '&release_year=' + $('#txt-movie-release_year').val() + '&tagline=' + $('#txt-movie-tagline').val());
+		//alert("Resultado: " + '/Grupo18-S10/SaveMovieServlet?title=' + $('#txt-movie-title').val() + '&release_year=' + $('#txt-movie-release_year').val() + '&tagline=' + $('#txt-movie-tagline').val());
 				
 		$.ajax( {
 			
 			type: "GET",
-			url: '/Grupo20/SaveMovieServlet?title=' + $('#txt-movie-title').val() + '&release_year=' + $('#txt-movie-release_year').val() + '&tagline=' + $('#txt-movie-tagline').val() ,
+			url: '/Grupo18-S10/SaveMovieServlet?title=' + $('#txt-movie-title').val() + '&release_year=' + $('#txt-movie-release_year').val() + '&tagline=' + $('#txt-movie-tagline').val() ,
 			success: function(data) {
 			    alert("Resultado: " + data.resultado);
 			}
