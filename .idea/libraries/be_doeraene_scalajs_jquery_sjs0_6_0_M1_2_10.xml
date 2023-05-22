@@ -1,0 +1,14 @@
+<component name="libraryTable">
+  <library name="be.doeraene.scalajs.jquery_sjs0.6.0.M1_2.10" type="repository">
+    <properties maven-id="be.doeraene:scalajs-jquery_sjs0.6.0-M1_2.10:0.7.0" />
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/be/doeraene/scalajs-jquery_sjs0.6.0-M1_2.10/0.7.0/scalajs-jquery_sjs0.6.0-M1_2.10-0.7.0.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/org/scala-lang/scala-library/2.10.4/scala-library-2.10.4.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/org/webjars/jquery/1.10.2/jquery-1.10.2.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/org/scala-js/scalajs-library_2.10/0.6.0-M1/scalajs-library_2.10-0.6.0-M1.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/org/scala-js/scalajs-dom_sjs0.6.0-M1_2.10/0.7.0/scalajs-dom_sjs0.6.0-M1_2.10-0.7.0.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
