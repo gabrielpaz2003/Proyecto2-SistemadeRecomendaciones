@@ -9,4 +9,36 @@
     <welcome-file>default.htm</welcome-file>
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
+  <servlet>
+    <servlet-name>MoviesByActor</servlet-name>
+    <servlet-class>MoviesByActor</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>HelloServlet</servlet-name>
+    <servlet-class>HelloServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>SaveMovieServlet</servlet-name>
+    <servlet-class>SaveMovieServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>SaveProductServlet</servlet-name>
+    <servlet-class>SaveProductServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>MoviesByActor</servlet-name>
+    <url-pattern>/MoviesByActor</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>HelloServlet</servlet-name>
+    <url-pattern>/HelloServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>SaveMovieServlet</servlet-name>
+    <url-pattern>/SaveMovieServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>SaveProductServlet</servlet-name>
+    <url-pattern>/SaveProductServlet</url-pattern>
+  </servlet-mapping>
 </web-app>

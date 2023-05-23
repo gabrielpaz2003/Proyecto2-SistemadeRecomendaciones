@@ -102,7 +102,7 @@
 	//Evento del botón que creara una nueva pelicula
 	$("#btn-movie-insert").click(function(){
 		
-		//alert("Resultado: " + '/Grupo18-S10/SaveMovieServlet?title=' + $('#txt-movie-title').val() + '&release_year=' + $('#txt-movie-release_year').val() + '&tagline=' + $('#txt-movie-tagline').val());
+		//alert("Resultado: " + '/Seccion10Grupo18/SaveMovieServlet?title=' + $('#txt-movie-title').val() + '&release_year=' + $('#txt-movie-release_year').val() + '&tagline=' + $('#txt-movie-tagline').val());
 				
 		$.ajax( {
 			
