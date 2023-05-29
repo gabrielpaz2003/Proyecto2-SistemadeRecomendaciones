@@ -1,5 +1,5 @@
 <component name="ArtifactManager">
-  <artifact type="war" build-on-make="true" name="Proyecto2-SistemaRecomendaciones:war">
+  <artifact type="war" build-on-make="true" name="Seccion10Grupo18:war">
     <output-path>$PROJECT_DIR$/target</output-path>
     <properties id="maven-jee-properties">
       <options>
@@ -7,8 +7,8 @@
         <packaging>war</packaging>
       </options>
     </properties>
-    <root id="archive" name="Proyecto_2-1.0-SNAPSHOT.war">
-      <element id="artifact" artifact-name="Proyecto2-SistemaRecomendaciones:war exploded" />
+    <root id="archive" name="Seccion10Grupo18.war">
+      <element id="artifact" artifact-name="Seccion10Grupo18:war exploded" />
     </root>
   </artifact>
 </component>

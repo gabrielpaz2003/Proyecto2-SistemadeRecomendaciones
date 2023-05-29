@@ -43,7 +43,7 @@ public class SaveProductServlet extends HttpServlet {
 	 	JSONArray insertionResult = new JSONArray();
 	 	
 	 	String nombreProducto = request.getParameter("nombreProducto");
-	 	String precioProducto = request.getParameter("precioProducto");
+	 	Integer precioProducto = request.getParameter("precioProducto");
 	 	String descripcionProducto = request.getParameter("descripcionProducto");
 	 	
 	 	 try ( EmbeddedNeo4j neo4jDriver = new EmbeddedNeo4j( "neo4j+s://40c6bfa9.databases.neo4j.io", "neo4j", "tojG1xseDQwqu_DVyu9g1VAzGfM5COUKbLn9hs2vBIs " ) )

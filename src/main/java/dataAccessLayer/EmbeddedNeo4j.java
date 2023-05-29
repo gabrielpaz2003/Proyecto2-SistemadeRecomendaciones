@@ -109,6 +109,22 @@ public class EmbeddedNeo4j implements AutoCloseable {
         }
         return null;
     }
+    public String insertMovie(String movieTitle, int releaseYear, String tagline) {
+        try (Session session = driver.session()) {
+            CompletableFuture<String> result = CompletableFuture.supplyAsync(() -> {
+                try (Transaction tx = session.beginTransaction()) {
+                    tx.run("CREATE (m:Movie {title: $title, releaseYear: $releaseYear, tagline: $tagline})",
+                            parameters("title", movieTitle, "releaseYear", releaseYear, "tagline", tagline));
+                    tx.commit();
+                    return "OK";
+                }
+            });
+            return result.get();
+        } catch (InterruptedException | ExecutionException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 
 
 }

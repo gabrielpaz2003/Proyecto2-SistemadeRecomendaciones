@@ -15,7 +15,7 @@
       <configuration>
         <setting name="validation-enabled" value="true" />
         <datasource-mapping>
-          <factory-entry name="Proyecto2-SistemaRecomendaciones" />
+          <factory-entry name="Seccion10Grupo18" />
         </datasource-mapping>
         <naming-strategy-map />
       </configuration>
@@ -42,6 +42,7 @@
     <orderEntry type="library" name="xkcoding.json.simple" level="project" />
     <orderEntry type="library" name="googlecode.json.simple" level="project" />
     <orderEntry type="library" name="neo4j.driver.java" level="project" />
+    <orderEntry type="library" name="be.doeraene.scalajs.jquery_sjs0.6.0.M1_2.10" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: jakarta.servlet:jakarta.servlet-api:5.0.0" level="project" />
     <orderEntry type="library" name="Maven: org.glassfish.jersey.containers:jersey-container-servlet:3.0.4" level="project" />
     <orderEntry type="library" name="Maven: org.glassfish.jersey.containers:jersey-container-servlet-core:3.0.4" level="project" />
@@ -108,6 +109,5 @@
     <orderEntry type="library" scope="TEST" name="Maven: org.apiguardian:apiguardian-api:1.1.2" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.junit.jupiter:junit-jupiter-engine:5.9.1" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.junit.platform:junit-platform-engine:1.9.1" level="project" />
-    <orderEntry type="library" name="be.doeraene.scalajs.jquery_sjs0.6.0.M1_2.10" level="project" />
   </component>
 </module>
