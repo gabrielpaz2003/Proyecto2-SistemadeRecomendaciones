@@ -1,34 +1,33 @@
-import dataAccessLayer.EmbeddedNeo4j;
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
+/*
+
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.LinkedList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.LinkedList;
 
-/**
- * Servlet implementation class MoviesByActor
- */
+import org.json.simple.JSONObject;
+
+import dataAccessLayer.EmbeddedNeo4j;
+
+import org.json.simple.JSONArray;
+
+
 @WebServlet("/MoviesByActor")
 public class MoviesByActor extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
+
     public MoviesByActor() {
         super();
         // TODO Auto-generated constructor stub
     }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
+
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		PrintWriter out = response.getWriter();
@@ -39,7 +38,7 @@ public class MoviesByActor extends HttpServlet {
 	 	JSONArray PeliculasActor = new JSONArray();
 	 	
 	 	String myActor = request.getParameter("actor_name");
-	 	 try ( EmbeddedNeo4j greeter = new EmbeddedNeo4j( "neo4j+s://40c6bfa9.databases.neo4j.io", "neo4j", "tojG1xseDQwqu_DVyu9g1VAzGfM5COUKbLn9hs2vBIs" ) )
+	 	 try ( EmbeddedNeo4j greeter = new EmbeddedNeo4j( "bolt://3.231.25.113:7687", "neo4j", "wax-pitches-grove" ) )
 	        {
 			 	LinkedList<String> myactors = greeter.getMoviesByActor(myActor);
 			 	
@@ -60,12 +59,10 @@ public class MoviesByActor extends HttpServlet {
 	 	
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
 
 }
+*/

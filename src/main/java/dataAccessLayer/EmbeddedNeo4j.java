@@ -30,6 +30,26 @@ public class EmbeddedNeo4j implements AutoCloseable {
         driver.close();
     }
 
+    public String insertProduct(String nombreProducto, int precioProducto, String descripcionProducto) {
+        try (Session session = driver.session()) {
+            CompletableFuture<String> result = CompletableFuture.supplyAsync(() -> {
+                try (Transaction tx = session.beginTransaction()) {
+                    tx.run("MERGE (p:Producto {nombreProducto: '"+nombreProducto+"', precioProducto: "+precioProducto+", descripcionProducto: '"+descripcionProducto+"'})");
+                    tx.commit();
+                    return "OK";
+                }
+            });
+            return result.get();
+        } catch (InterruptedException | ExecutionException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+
+
+    /* 
+
     public void printGreeting(String message) {
         try (Session session = driver.session()) {
             CompletableFuture<Void> greeting = CompletableFuture.supplyAsync(() -> {
@@ -93,22 +113,9 @@ public class EmbeddedNeo4j implements AutoCloseable {
         }
         return null;
     }
+    */
 
-    public String insertProduct(String nombreProducto, int precioProducto, String descripcionProducto) {
-        try (Session session = driver.session()) {
-            CompletableFuture<String> result = CompletableFuture.supplyAsync(() -> {
-                try (Transaction tx = session.beginTransaction()) {
-                    tx.run("CREATE (Test:Producto {nombre:'" + nombreProducto + "', precio:" + precioProducto + ", descripcion:'" + descripcionProducto + "'})");
-                    tx.commit();
-                    return "OK";
-                }
-            });
-            return result.get();
-        } catch (InterruptedException | ExecutionException e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
+    /* 
     public String insertMovie(String movieTitle, int releaseYear, String tagline) {
         try (Session session = driver.session()) {
             CompletableFuture<String> result = CompletableFuture.supplyAsync(() -> {
@@ -125,10 +132,7 @@ public class EmbeddedNeo4j implements AutoCloseable {
         }
         return null;
     }
+    */
 
 
 }
-
-
-
-

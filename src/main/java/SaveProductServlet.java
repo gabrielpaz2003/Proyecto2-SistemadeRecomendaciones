@@ -1,19 +1,24 @@
-
-
 import java.io.IOException;
+
 import java.io.PrintWriter;
+import java.util.Arrays;
 import java.util.LinkedList;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
 import dataAccessLayer.EmbeddedNeo4j;
+
+import org.json.simple.JSONArray;
+
+import java.text.Normalizer;
+import java.util.regex.Pattern;
+
 
 /**
  * Servlet implementation class SaveProductServlet
@@ -43,12 +48,17 @@ public class SaveProductServlet extends HttpServlet {
 	 	JSONArray insertionResult = new JSONArray();
 	 	
 	 	String nombreProducto = request.getParameter("nombreProducto");
-	 	Integer precioProducto = request.getParameter("precioProducto");
+	 	String precioProducto = request.getParameter("precioProducto");
 	 	String descripcionProducto = request.getParameter("descripcionProducto");
 	 	
-	 	 try ( EmbeddedNeo4j neo4jDriver = new EmbeddedNeo4j( "neo4j+s://40c6bfa9.databases.neo4j.io", "neo4j", "tojG1xseDQwqu_DVyu9g1VAzGfM5COUKbLn9hs2vBIs " ) )
+
+		myResponse.put("nombreProducto", nombreProducto);
+		myResponse.put("precioProducto", precioProducto);
+		myResponse.put("descripcionProducto", descripcionProducto);
+	 	
+	 	 try ( EmbeddedNeo4j dataBase = new EmbeddedNeo4j( "neo4j+s://40c6bfa9.databases.neo4j.io", "neo4j", "tojG1xseDQwqu_DVyu9g1VAzGfM5COUKbLn9hs2vBIs")) 
 	        {
-			 	String myResultTx = neo4jDriver.insertProduct(nombreProducto, Integer.parseInt(precioProducto), descripcionProducto);
+			 	String myResultTx = dataBase.insertProduct(nombreProducto, Integer.parseInt(precioProducto), descripcionProducto);
 	        	
 			 	myResponse.put("resultado", myResultTx);
 	        } catch (Exception e) {
@@ -56,10 +66,10 @@ public class SaveProductServlet extends HttpServlet {
 				e.printStackTrace();
 				myResponse.put("resultado", "Error: " + e.getMessage());
 			}
-	 	
-	 	
-	 	out.println(myResponse);
-	 	out.flush();
+
+
+
+			
 	}
 
 	/**
