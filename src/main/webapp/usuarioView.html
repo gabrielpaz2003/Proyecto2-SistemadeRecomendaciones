@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Usuarios</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+        
+        <h1>USUARIO</h1>
+        <nav>
+            <ul class="navbar">
+                <li><a href="index.html">Compras</a></li>
+                <li><a href="acercaDe.html">Acerca de</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    
+    <div id="container">
+        <form id="add-client-form">
+            <h2>Ingresar un Usuario</h2>
+            <input id="txt-nombre-cliente" type="text" placeholder="Ingresar nombre">
+            <input id="txt-apellido-cliente" type="text" placeholder="Ingresar apellido">
+            <input id="txt-edad-cliente" type="number" placeholder="Ingrese la edad">
+            <button id="btn-insertar-cliente" type="button">Ingresar nuevo usuario</button>
+        </form>
+        <form id="recomendaciones-form">
+            <h2>Recomendaciones</h2>
+        
+            <input type="text" placeholder="Ingrese el ID del usuario que desea ver sus recomendaciones" class="input-recomendaciones">
+            <button type="button" class="button-recomendaciones">Verificar Recomendaciones</button>
+
+            <div id = "listado-recomendaciones">
+                <h3>Recomendaciones de productos</h3>
+                <ul>
+                    <li>Producto 1</li>
+                    <li>Producto 2</li>
+                    <li>Producto 3</li>
+                    <li>Producto 4</li>
+                    <li>Producto 5</li>
+                </ul>
+            </div>
+        </form>
+    </div>
+    
+
+    <footer>
+        <span>Copyright &copy; Universidad del Valle de Guatemala 2023</span>
+    </footer>
+
+    <script src="vendor/jquery/jquery.js"></script>
+
+    <script src="vendor/bootstrap/js/bootstrap.bundle.js"></script>
+ 
+ 
+    <script src="vendor/jquery-easing/jquery.easing.js"></script>
+ 
+ 
+    <!-- Custom scripts for all pages-->
+    <script src="js/controller-user.js"></script>
+
+</body>
+</html>

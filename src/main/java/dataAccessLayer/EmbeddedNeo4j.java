@@ -46,6 +46,22 @@ public class EmbeddedNeo4j implements AutoCloseable {
         return null;
     }
 
+    public String insertClient(String nombreCliente, String apellidoCliente, int edadCliente ,String idCliente) {
+        try (Session session = driver.session()) {
+            CompletableFuture<String> result = CompletableFuture.supplyAsync(() -> {
+                try (Transaction tx = session.beginTransaction()) {
+                    tx.run("MERGE (c:Cliente {nombreCliente: '"+nombreCliente+"', apellidoCliente: '"+apellidoCliente+"', edadCliente: '"+edadCliente+"', idCliente: '"+idCliente+"'})");
+                    tx.commit();
+                    return "OK";
+                }
+            });
+            return result.get();
+        } catch (InterruptedException | ExecutionException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
 
 
     /* 

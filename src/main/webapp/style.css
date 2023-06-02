@@ -98,6 +98,13 @@ h2 {
     border-radius: 5px;
 }
 
+#listado-recomendaciones{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
 #container-acercaDe {
     display: flex;
     justify-content: center;
@@ -114,6 +121,17 @@ h2 {
 input[type="text"],
 input[type="number"],
 textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    resize: vertical;
+    text-align: center;
+}
+
+select {
     width: 100%;
     padding: 10px;
     margin-bottom: 10px;

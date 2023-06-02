@@ -9,10 +9,10 @@
 
     <header>
         
-        <h1>COMPRAS REALIZADAS POR UN CLIENTE</h1>
+        <h1>COMPRAS REALIZADAS POR UN CLIENTE PP</h1>
         <nav>
             <ul class="navbar">
-                <li><a href="categoriaView.html">Categorías</a></li>
+                <li><a href="usuarioView.html">Usuarios</a></li>
                 <li><a href="acercaDe.html">Acerca de</a></li>
             </ul>
         </nav>
@@ -20,24 +20,28 @@
 
     
     <div id="container">
-        <form id="search-form">
-            <h2>Buscar cliente</h2>
-            <input type="text" placeholder="Nombre del cliente">
-            <button type="button">Consultar compras del cliente</button>
-            <button type="button">Ver clientes</button>
+        <form id="buy-form">
+            <h2>Realizar una compra</h2>
+            <input type="text" placeholder="Nombre del producto que desea comprar">
+            <input type="text" placeholder="Ingrese su nombre de Usuario">
+            <button  type="button">Comprar producto</button>
         </form>
         <form id="add-product-form">
             <h2>Agregar un Producto</h2>
             <input id="txt-nombre-producto" type="text" placeholder="Nombre del producto">
             <input id="txt-precio-producto" type="number" placeholder="Precio del producto">
             <textarea id="txt-descripcion-producto" placeholder="Descripción del producto"></textarea>
+            <select name="Categoria" id="sel-categoria-producto">
+                <option value="Frutas">Frutas</option>
+                <option value="Lacteos">Lacteos</option>
+                <option value="Carnes">Carnes</option>
+                <option value="Bebidas">Bebidas</option>
+                <option value="Panadería">Panadería</option>
+              </select>
             <button id="btn-insertar-producto" type="button">Agregar producto</button>
         </form>
     </div>
 
-    <div id="listado-productos">
-
-    </div>
 
     <footer>
         <span>Copyright &copy; Universidad del Valle de Guatemala 2023</span>
