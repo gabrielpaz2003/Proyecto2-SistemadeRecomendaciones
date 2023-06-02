@@ -50,26 +50,25 @@ public class SaveProductServlet extends HttpServlet {
 	 	String nombreProducto = request.getParameter("nombreProducto");
 	 	String precioProducto = request.getParameter("precioProducto");
 	 	String descripcionProducto = request.getParameter("descripcionProducto");
+		String categoriaProducto = request.getParameter("categoriaProducto");
 	 	
 
 		myResponse.put("nombreProducto", nombreProducto);
 		myResponse.put("precioProducto", precioProducto);
 		myResponse.put("descripcionProducto", descripcionProducto);
+		myResponse.put("categoriaProducto", categoriaProducto);
 	 	
 	 	 try ( EmbeddedNeo4j dataBase = new EmbeddedNeo4j( "neo4j+s://40c6bfa9.databases.neo4j.io", "neo4j", "tojG1xseDQwqu_DVyu9g1VAzGfM5COUKbLn9hs2vBIs")) 
 	        {
-			 	String myResultTx = dataBase.insertProduct(nombreProducto, Integer.parseInt(precioProducto), descripcionProducto);
-	        	
+			 	String myResultTx = dataBase.insertProduct(nombreProducto, Integer.parseInt(precioProducto), descripcionProducto, categoriaProducto);
+				dataBase.productoPerteneceA(nombreProducto, categoriaProducto);
+
 			 	myResponse.put("resultado", myResultTx);
 	        } catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 				myResponse.put("resultado", "Error: " + e.getMessage());
-			}
-
-
-
-			
+			}	
 	}
 
 	/**

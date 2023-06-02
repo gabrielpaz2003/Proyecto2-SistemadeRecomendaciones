@@ -16,6 +16,8 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
+import java.util.HashMap;
+import java.util.Map;
 
 public class EmbeddedNeo4j implements AutoCloseable {
 
@@ -30,11 +32,11 @@ public class EmbeddedNeo4j implements AutoCloseable {
         driver.close();
     }
 
-    public String insertProduct(String nombreProducto, int precioProducto, String descripcionProducto) {
+    public String insertProduct(String nombreProducto, int precioProducto, String descripcionProducto, String categoriaProducto) {
         try (Session session = driver.session()) {
             CompletableFuture<String> result = CompletableFuture.supplyAsync(() -> {
                 try (Transaction tx = session.beginTransaction()) {
-                    tx.run("MERGE (p:Producto {nombreProducto: '"+nombreProducto+"', precioProducto: "+precioProducto+", descripcionProducto: '"+descripcionProducto+"'})");
+                    tx.run("MERGE (p:Producto {nombreProducto: '"+nombreProducto+"', precioProducto: '"+precioProducto+"', descripcionProducto: '"+descripcionProducto+"' , categoriaProducto: '"+categoriaProducto+"'})");
                     tx.commit();
                     return "OK";
                 }
@@ -45,12 +47,46 @@ public class EmbeddedNeo4j implements AutoCloseable {
         }
         return null;
     }
+
+    public String productoPerteneceA(String nombreProducto, String categoriaProducto) {
+    	try (Session session = driver.session()) {
+            String result = session.writeTransaction( new TransactionWork<String>(){
+                @Override
+                public String execute( Transaction tx ){
+                    tx.run("MATCH (p:Producto {nombreProducto: '"+nombreProducto+"'}), (c:Category {name: '"+categoriaProducto+"'}) MERGE (p)-[:PERTENECE_A]->(c)");
+                    return "OK";
+                }
+            }
+   		 );
+            return result;
+        } catch (Exception e) {
+        	return e.getMessage();
+        }
+    }
+
+    public String compra(String nombreProducto, String idCliente) {
+    	try (Session session = driver.session()) {
+            String result = session.writeTransaction( new TransactionWork<String>(){
+                @Override
+                public String execute( Transaction tx ){
+                    tx.run("MATCH (u:User {idCliente: '"+idCliente+"'}), (p:Producto {nombreProducto: '"+nombreProducto+"'}) MERGE (u)-[:COMPRA]->(p)");
+                    return "OK";
+                }
+            }
+   		 );
+            return result;
+        } catch (Exception e) {
+        	return e.getMessage();
+        }
+    }
+
+
 
     public String insertClient(String nombreCliente, String apellidoCliente, int edadCliente ,String idCliente) {
         try (Session session = driver.session()) {
             CompletableFuture<String> result = CompletableFuture.supplyAsync(() -> {
                 try (Transaction tx = session.beginTransaction()) {
-                    tx.run("MERGE (c:Cliente {nombreCliente: '"+nombreCliente+"', apellidoCliente: '"+apellidoCliente+"', edadCliente: '"+edadCliente+"', idCliente: '"+idCliente+"'})");
+                    tx.run("MERGE (u:User {nombreCliente: '"+nombreCliente+"', apellidoCliente: '"+apellidoCliente+"', edadCliente: '"+edadCliente+"', idCliente: '"+idCliente+"'})");
                     tx.commit();
                     return "OK";
                 }
@@ -63,92 +99,50 @@ public class EmbeddedNeo4j implements AutoCloseable {
     }
 
 
-
-    /* 
-
-    public void printGreeting(String message) {
+    public List<Map<String, Object>> recomendaciones(String idCliente) {
         try (Session session = driver.session()) {
-            CompletableFuture<Void> greeting = CompletableFuture.supplyAsync(() -> {
-                try (Transaction tx = session.beginTransaction()) {
+            List<Map<String, Object>> results = session.readTransaction(new TransactionWork<List<Map<String, Object>>>() {
+                @Override
+                public List<Map<String, Object>> execute(Transaction tx) {
                     Result result = tx.run(
-                            "CREATE (a:Greeting) " +
-                                    "SET a.message = $message " +
-                                    "RETURN a.message + ', from node ' + id(a)",
-                            parameters("message", message)
+                        "MATCH (u:User {idCliente: $idCliente})-[:COMPRA]->(:Producto)-[:PERTENECE_A]->(c:Category),"
+                        + "(c)-[:PERTENECE_A]->(p:Producto) "
+                        + "WHERE NOT EXISTS((u)-[:COMPRA]->(p)) "
+                        + "RETURN c.nombre AS Categoria, COLLECT(p.nombre) AS Productos",
+                        parameters("idCliente", idCliente)
                     );
-                    ResultSummary summary = result.consume();
-                    tx.commit();
-                }
-                return null;
-            });
-            greeting.get(); // Espera a que se complete la transacción
-            System.out.println("Greeting created successfully.");
-        } catch (InterruptedException | ExecutionException e) {
-            e.printStackTrace();
-        }
-    }
 
-    public LinkedList<String> getActors() {
-        try (Session session = driver.session()) {
-            CompletableFuture<LinkedList<String>> actors = CompletableFuture.supplyAsync(() -> {
-                LinkedList<String> myactors = new LinkedList<>();
-                try (Transaction tx = session.beginTransaction()) {
-                    Result result = tx.run("MATCH (people:Person) RETURN people.name");
-                    List<Record> registros = result.list();
-                    for (int i = 0; i < registros.size(); i++) {
-                        myactors.add(registros.get(i).get("people.name").asString());
+                    List<Map<String, Object>> results = new LinkedList<>();
+                    while (result.hasNext()) {
+                        Record record = result.next();
+                        Map<String, Object> resultItem = new HashMap<>();
+                        resultItem.put("Categoria", record.get("Categoria").asString());
+                        resultItem.put("Productos", record.get("Productos").asList());
+                        results.add(resultItem);
                     }
-                    tx.commit();
+                    return results;
                 }
-                return myactors;
             });
-            return actors.get();
-        } catch (InterruptedException | ExecutionException e) {
+            return results;
+        } catch (Exception e) {
             e.printStackTrace();
+            return null;
         }
-        return null;
     }
 
-    public LinkedList<String> getMoviesByActor(String actor) {
-        try (Session session = driver.session()) {
-            CompletableFuture<LinkedList<String>> movies = CompletableFuture.supplyAsync(() -> {
-                LinkedList<String> mymovies = new LinkedList<>();
-                try (Transaction tx = session.beginTransaction()) {
-                    Result result = tx.run("MATCH (tom:Person {name: \"" + actor + "\"})-[:ACTED_IN]->(actorMovies) RETURN actorMovies.title");
-                    List<Record> registros = result.list();
-                    for (int i = 0; i < registros.size(); i++) {
-                        mymovies.add(registros.get(i).get("actorMovies.title").asString());
-                    }
-                    tx.commit();
-                }
-                return mymovies;
-            });
-            return movies.get();
-        } catch (InterruptedException | ExecutionException e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
-    */
+    
 
-    /* 
-    public String insertMovie(String movieTitle, int releaseYear, String tagline) {
-        try (Session session = driver.session()) {
-            CompletableFuture<String> result = CompletableFuture.supplyAsync(() -> {
-                try (Transaction tx = session.beginTransaction()) {
-                    tx.run("CREATE (m:Movie {title: $title, releaseYear: $releaseYear, tagline: $tagline})",
-                            parameters("title", movieTitle, "releaseYear", releaseYear, "tagline", tagline));
-                    tx.commit();
-                    return "OK";
-                }
-            });
-            return result.get();
-        } catch (InterruptedException | ExecutionException e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
-    */
 
 
 }
+
+
+
+ /* "MATCH (u:User {userId: $userId})-[:LIVES_IN]->(l:Location)<-[:LIVES_IN]-(m:User),"
+                            + "(u)-[:WANTS_RELATIONSHIP]->(r:RelationshipType)<-[:WANTS_RELATIONSHIP]-(m),"
+                            + "(u)-[:HAS_SEX]->(s:Sex), (m)-[:HAS_SEX]->(oppositeSex:Sex),"
+                            + "(u)-[:INTERESTED_IN]->(i:Interest)<-[:INTERESTED_IN]-(m)"
+                            + "WHERE NOT s = oppositeSex "
+                            + "WITH u, m, collect(i) AS sharedInterests "
+                            + "RETURN m AS matchedUser, sharedInterests, size(sharedInterests) AS commonInterestCount "
+                            + "ORDER BY commonInterestCount DESC"*/

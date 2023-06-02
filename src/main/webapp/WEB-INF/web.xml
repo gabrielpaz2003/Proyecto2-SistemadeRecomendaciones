@@ -28,6 +28,20 @@
   	<servlet-name>SaveClientServlet</servlet-name>
   	<servlet-class>SaveClientServlet</servlet-class>
   </servlet>
+  <servlet>
+  	<description>
+  	</description>
+  	<display-name>BuyByClientServlet</display-name>
+  	<servlet-name>BuyByClientServlet</servlet-name>
+  	<servlet-class>BuyByClientServlet</servlet-class>
+  </servlet>
+  <servlet>
+  	<description>
+  	</description>
+  	<display-name>SearchProductAndCategory</display-name>
+  	<servlet-name>SearchProductAndCategory</servlet-name>
+  	<servlet-class>SearchProductAndCategory</servlet-class>
+  </servlet>
   <servlet-mapping>
     <servlet-name>MoviesByActor</servlet-name>
     <url-pattern>/MoviesByActor</url-pattern>
@@ -43,5 +57,13 @@
   <servlet-mapping>
   	<servlet-name>SaveClientServlet</servlet-name>
   	<url-pattern>/SaveClientServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>BuyByClientServlet</servlet-name>
+  	<url-pattern>/BuyByClientServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>SearchProductAndCategory</servlet-name>
+  	<url-pattern>/SearchProductAndCategory</url-pattern>
   </servlet-mapping>
 </web-app>

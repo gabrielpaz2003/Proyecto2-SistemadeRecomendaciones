@@ -1,3 +1,4 @@
+
 import java.io.IOException;
 
 import java.io.PrintWriter;
@@ -21,16 +22,16 @@ import java.util.regex.Pattern;
 
 
 /**
- * Servlet implementation class SaveClientServlet
+ * Servlet implementation class BuyByClientServlet
  */
-@WebServlet("/SaveClientServlet")
-public class SaveClientServlet extends HttpServlet {
+@WebServlet("/BuyByClientServlet")
+public class BuyByClientServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public SaveClientServlet() {
+    public BuyByClientServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -47,24 +48,18 @@ public class SaveClientServlet extends HttpServlet {
 	 	
 	 	JSONArray insertionResult = new JSONArray();
 	 	
-	 	String nombreCliente = request.getParameter("nombreCliente");
-	 	String apellidoCliente = request.getParameter("apellidoCliente");
-	 	String edadCliente = request.getParameter("edadCliente");
-
-		var primerasTresLetras = apellidoCliente.substring(0, 3);
-		String idCliente = primerasTresLetras + edadCliente;
+	 	String nombreProducto = request.getParameter("nombreProducto");
+	 	String idCliente = request.getParameter("idCliente");
 	 	
 
-		myResponse.put("nombreCliente", nombreCliente);
-		myResponse.put("apellidoCliente", apellidoCliente);
-		myResponse.put("edadCliente", edadCliente);
+		myResponse.put("nombreProducto", nombreProducto);
 		myResponse.put("idCliente", idCliente);
-
+		
 	 	
 	 	 try ( EmbeddedNeo4j dataBase = new EmbeddedNeo4j( "neo4j+s://40c6bfa9.databases.neo4j.io", "neo4j", "tojG1xseDQwqu_DVyu9g1VAzGfM5COUKbLn9hs2vBIs")) 
 	        {
-			 	String myResultTx = dataBase.insertClient(nombreCliente, apellidoCliente, Integer.parseInt(edadCliente), idCliente);
-	        	
+			 	String myResultTx = dataBase.compra(nombreProducto, idCliente);
+
 			 	myResponse.put("resultado", myResultTx);
 	        } catch (Exception e) {
 				// TODO Auto-generated catch block
