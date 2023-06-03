@@ -105,10 +105,10 @@ public class EmbeddedNeo4j implements AutoCloseable {
                 @Override
                 public List<Map<String, Object>> execute(Transaction tx) {
                     Result result = tx.run(
-                        "MATCH (u:User {idCliente: $idCliente})-[:COMPRA]->(:Producto)-[:PERTENECE_A]->(c:Category),"
-                        + "(c)-[:PERTENECE_A]->(p:Producto) "
+                        "MATCH (u:User {idCliente: $idCliente}),"
+                        + "MATCH (p:Producto)-[:PERTENECE_A]->(c:Category) "
                         + "WHERE NOT EXISTS((u)-[:COMPRA]->(p)) "
-                        + "RETURN c.nombre AS Categoria, COLLECT(p.nombre) AS Productos",
+                        + "RETURN c.name AS Categoria, COLLECT(p.nombreProducto) AS Productos",
                         parameters("idCliente", idCliente)
                     );
 
@@ -120,6 +120,7 @@ public class EmbeddedNeo4j implements AutoCloseable {
                         resultItem.put("Productos", record.get("Productos").asList());
                         results.add(resultItem);
                     }
+                    System.out.println(results);
                     return results;
                 }
             });
@@ -137,12 +138,3 @@ public class EmbeddedNeo4j implements AutoCloseable {
 }
 
 
-
- /* "MATCH (u:User {userId: $userId})-[:LIVES_IN]->(l:Location)<-[:LIVES_IN]-(m:User),"
-                            + "(u)-[:WANTS_RELATIONSHIP]->(r:RelationshipType)<-[:WANTS_RELATIONSHIP]-(m),"
-                            + "(u)-[:HAS_SEX]->(s:Sex), (m)-[:HAS_SEX]->(oppositeSex:Sex),"
-                            + "(u)-[:INTERESTED_IN]->(i:Interest)<-[:INTERESTED_IN]-(m)"
-                            + "WHERE NOT s = oppositeSex "
-                            + "WITH u, m, collect(i) AS sharedInterests "
-                            + "RETURN m AS matchedUser, sharedInterests, size(sharedInterests) AS commonInterestCount "
-                            + "ORDER BY commonInterestCount DESC"*/
